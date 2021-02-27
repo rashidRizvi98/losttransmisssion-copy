@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  SafeAreaView,
-  FlatList,
-  StyleSheet,
-  View,
-  ScrollView,
-  Picker,
-  Text,
-} from "react-native";
+import { FlatList, StyleSheet, Picker, Text } from "react-native";
 import Card from "../components/Card";
 import Colors from "../utils/colors";
 import { db } from "../components/Firebase/firebase";
@@ -71,6 +63,10 @@ export default function FailurePrediction() {
 
   return (
     <SafeView style={styles.contain}>
+      <Text style={{ fontSize: 20, color: "white", fontWeight: "bold" }}>
+        Select an outstation below
+      </Text>
+
       <Picker
         mode="dropdown"
         selectedValue={location}

@@ -48,7 +48,7 @@ export default function DonutChart({
 
       if (inputRef?.current) {
         inputRef.current.setNativeProps({
-          text: `${Math.round(V.value)}`,
+          text: `${Math.round(V.value)}%`,
         });
       }
     });

@@ -11,20 +11,24 @@ export default function FailureHistory() {
 
   const getFailureHistoryData = async () => {
     if (searchByLocation == "") {
-      db.collection("failureHistory").onSnapshot(function (querySnapshot) {
-        var response = [];
+      db.collection("failureHistory")
+        .orderBy("Date", "desc")
+        .onSnapshot(function (querySnapshot) {
+          var response = [];
 
-        querySnapshot.forEach(function (doc) {
-          //  if(searchByLocation && (searchByLocation===doc.data().name))
-          response.push(doc.data());
-          //       console.log(doc.data());
+          querySnapshot.forEach(function (doc) {
+            //  if(searchByLocation && (searchByLocation===doc.data().name))
+            response.push(doc.data());
+            //       console.log(doc.data());
+          });
+          setFailureHistory(response);
+          //console.log("Current data: ", response.join(", "));
         });
-        setFailureHistory(response);
-        //console.log("Current data: ", response.join(", "));
-      });
     } else {
       db.collection("failureHistory")
+        .orderBy("Date", "desc")
         .where("Location", "==", searchByLocation)
+
         .onSnapshot(function (querySnapshot) {
           var response = [];
 
@@ -82,7 +86,7 @@ export default function FailureHistory() {
       <FlatList
         style={{ marginLeft: -20, marginRight: -20 }}
         keyExtractor={(item) => item.Time}
-        data={failureHistory.reverse()}
+        data={failureHistory}
         renderItem={({ item }) => (
           <View style={styles.card}>
             <Text style={styles.txtColor}>
